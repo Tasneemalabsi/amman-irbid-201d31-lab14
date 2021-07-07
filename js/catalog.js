@@ -12,8 +12,11 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   const selectElement = document.getElementById('items');
   for (let i in Product.allProducts) {
+    let optionEl = document.createElement('option');
+    optionEl.textContent=Product.allProducts[i].name;
+    selectElement.appendChild(optionEl);
 
-  }
+    }
 
 }
 
@@ -21,6 +24,7 @@ function populateForm() {
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
+  event.preventDefault();
 
   // TODO: Prevent the page from reloading
 
@@ -33,17 +37,41 @@ function handleSubmit(event) {
 }
 
 // TODO: Add the selected item and quantity to the cart
-function addSelectedItemToCart() {
+function addSelectedItemToCart(event) {
+  let chosenItem = document.getElementById('items');
+  let items = chosenItem.value;
+  console.log(items);
+  window.items2=items;
+  let chosenQuantity = document.getElementById('quantity')
+  
+  let quantity = chosenQuantity.value;
+  console.log(quantity);
+  window.quantity2=quantity;
+  cart.addItem(items, quantity);
+
   // TODO: suss out the item picked from the select list
   // TODO: get the quantity
   // TODO: using those, add one item to the Cart
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  let counter=0;
+  counter=document.getElementById('itemCount');
+  counter.textContent= items.length;
+  counter++;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
+  let divEl = document.getElementById('cartContents');
+  let ulEl = document.createElement('ul');
+  divEl.appendChild('ul');
+  for (let i=0; i<items2.length; i++ ) {
+    let liEl = document.createElement('li');
+    liEl.textContent=`${items2[i]} and the quantity is ${quantity2[i]}. `;
+    ulEl.appendChild(liEl);
+  }
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
 }
