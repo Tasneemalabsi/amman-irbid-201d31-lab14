@@ -11,7 +11,7 @@ function loadCart() {
   cart = new Cart(cartItems);
 }
 
-// Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
+// Make stupidity happen 3njad y3ni!! --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
   loadCart();
   clearCart();
@@ -25,10 +25,9 @@ function clearCart() {
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
-  let table2 = table;
-  for (let i=0; i<this.items.length; i++) {
+  for (let i=0; i<cart.items.length; i++) {
     let rowEl = document.createElement('tr');
-    rowEl.textContent= this.items[i];
+    rowEl.textContent= cart.items[i];
     
  }
 

@@ -39,39 +39,40 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart(event) {
   let chosenItem = document.getElementById('items');
-  let items = chosenItem.value;
-  console.log(items);
-  window.items2=items;
+  let item = chosenItem.value;
+  // console.log(items);
+  // window.items=items;
+  // console.log(items2);
+
   let chosenQuantity = document.getElementById('quantity')
   
   let quantity = chosenQuantity.value;
-  console.log(quantity);
-  window.quantity2=quantity;
-  cart.addItem(items, quantity);
+  // console.log(quantity);
+  // window.quantity2=quantity;
+  cart.addItem(item, quantity);
 
   // TODO: suss out the item picked from the select list
   // TODO: get the quantity
   // TODO: using those, add one item to the Cart
 }
-
+let count = 0
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
-  let counter=0;
-  counter=document.getElementById('itemCount');
-  counter.textContent= items.length;
-  counter++;
+  count++
+  let counter=document.getElementById('itemCount');
+  counter.textContent= cart.items.length;
 }
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   let divEl = document.getElementById('cartContents');
+  console.log(divEl)
   let ulEl = document.createElement('ul');
-  divEl.appendChild('ul');
-  for (let i=0; i<items2.length; i++ ) {
-    let liEl = document.createElement('li');
-    liEl.textContent=`${items2[i]} and the quantity is ${quantity2[i]}. `;
-    ulEl.appendChild(liEl);
-  }
+  divEl.appendChild(ulEl);
+  let liEl = document.createElement('li');
+  let last_element = cart.items[cart.items.length - 1]
+  liEl.textContent=`${last_element.product} and the quantity is ${last_element.quantity}.`;
+  ulEl.appendChild(liEl);
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
 }
