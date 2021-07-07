@@ -11,7 +11,7 @@ function loadCart() {
   cart = new Cart(cartItems);
 }
 
-// Make stupidity happen 3njad y3ni!! --- re-pull the Cart, clear out the screen and re-draw it
+// Make magic happen!! --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
   loadCart();
   clearCart();
