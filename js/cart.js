@@ -9,6 +9,7 @@ let cart;
 function loadCart() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   cart = new Cart(cartItems);
+  
 }
 
 // Make magic happen!! --- re-pull the Cart, clear out the screen and re-draw it
@@ -20,14 +21,36 @@ function renderCart() {
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
-  table.remove();
+  let tableHeaderRowCount = 1;
+  let rowCount = table.rows.length;
+  for (let i = tableHeaderRowCount; i < rowCount; i++) {
+      table.deleteRow(tableHeaderRowCount);
+  }
 }
 
+
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
+let tbodyEl=document.getElementsByTagName('tbody');
 function showCart() {
   for (let i=0; i<cart.items.length; i++) {
     let rowEl = document.createElement('tr');
-    rowEl.textContent= cart.items[i];
+    tbodyEl.appendchild(rowEl);
+    let tdEl= document.createElement('td');
+    rowEl.appendChild(tdEl);
+    let link = document.createElement('a');
+    link.setAttribute('href', cart.items[i].product);
+    link.addEventListener('click', removeItemFromCart);
+    link.textContent='remove item';
+    tdEl.appendChild(link);
+    let tdEl2=document.createElement('td');
+   rowEl.appendChild(tdEl2);
+   let link2 = document.createElement('a');
+   
+   link2.setAttribute('href', cart.items[i].quantity);
+   link.addEventListener('click', removeItemFromCart);
+   link2.textContent='remove quantity';
+   tdEl2.appendChild(link2);
+
     
  }
 
@@ -42,10 +65,17 @@ function showCart() {
 
 function removeItemFromCart(event) {
 
+  for (let i =0; i<cart.items.length; i++) {
+    if (this.items[i] === item) {
+      this.items.splice (i, 1);
+    }
+  }
+
+  let data2= JSON.stringify(cart.items);
+  localStorage.setItem('cartItems', data2)
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table
-
 }
 
 // This will initialize the page and draw the cart on screen

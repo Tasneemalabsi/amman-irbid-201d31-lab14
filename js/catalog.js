@@ -25,6 +25,7 @@ function populateForm() {
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
   event.preventDefault();
+  
 
   // TODO: Prevent the page from reloading
 
@@ -71,7 +72,7 @@ function updateCartPreview() {
   divEl.appendChild(ulEl);
   let liEl = document.createElement('li');
   let last_element = cart.items[cart.items.length - 1]
-  liEl.textContent=`${last_element.product} and the quantity is ${last_element.quantity}.`;
+  liEl.textContent=`the item is ${last_element.product} and the quantity is ${last_element.quantity}.`;
   ulEl.appendChild(liEl);
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
